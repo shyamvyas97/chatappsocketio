@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+<% include links.ejs %>
+</head>
+<body>
+<div class="page-container">
+
+<% include nav.ejs %>
+<div class="inner-block" style="min-height: 860px">
+<iframe src="/roomschat.html"></iframe>
+<% include footer.ejs %>
+</div>
+</div>
+<% include sidebar.ejs %>
+<script>
+
+  $(document).ready(function() {
+    // var socket= io.connect();
+    app.chat('<%= room.id %>', '<%= user.username %>')
+    $('.page-container').addClass('sidebar-collapsed-back');
+    $('.page-container').removeClass('sidebar-collapsed-back');
+    $('.page-container').addClass('sidebar-collapsed');
+    var socket = io();
+  });
+
+</script>
+<% include script.ejs %>
+</body>
+</html>

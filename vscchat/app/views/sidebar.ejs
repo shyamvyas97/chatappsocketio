@@ -1,0 +1,39 @@
+<!--slider menu-->
+    <div class="sidebar-menu">
+		  	<div class="logo"> <a href="#" class="sidebar-icon"> <span class="fa fa-bars"></span> </a> <a href="#"> <span id="logo" ></span> 
+			      <!--<img id="logo" src="" alt="Logo"/>--> 
+			  </a> </div>		  
+		    <div class="menu">
+		      <ul id="menu" >
+		        <li><a href="/index"><i class="fa fa-tachometer"></i><span>Dashboard</span></a>
+		        
+		        <li><a href="/rooms/5a06b30d03731d0f94e13eb7"><i class="fa fa-weixin "></i><span>Broadcast</span></a>
+		        </li>
+		        <li id="menu-comunicacao" ><a href="/rooms"><i class="fa fa-list-alt  nav_icon"></i><span>Rooms</a>
+		        </li>
+		          <li><a href="/about"><i class="fa fa-address-card"></i><span>About</span></a></li>
+		        
+		      </ul>
+		    </div>
+	 </div>
+<!--/slider menu-->
+<div class="clearfix"> </div>
+<script>
+var toggle = true;
+            
+$(".sidebar-icon").click(function() {                
+  if (toggle)
+  {
+    $(".page-container").addClass("sidebar-collapsed").removeClass("sidebar-collapsed-back");
+    $("#menu span").css({"position":"absolute"});
+  }
+  else
+  {
+    $(".page-container").removeClass("sidebar-collapsed").addClass("sidebar-collapsed-back");
+    setTimeout(function() {
+      $("#menu span").css({"position":"relative"});
+    }, 400);
+  }               
+                toggle = !toggle;
+       });
+</script>

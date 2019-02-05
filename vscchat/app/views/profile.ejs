@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Vsc Chat</title>
+   
+<% include links.ejs %>
+<script src="dist/js/dropzone.js"></script>
+</head>
+<body>
+<div class="page-container">
+
+<% include nav.ejs %>
+<div class="inner-block" style="min-height: 760px">
+	 <div class="col-sm-6">
+     </div>
+</div>
+
+<div class="copyrights">
+	 <% include footer.ejs %>
+</div>	
+
+</div>
+<% include sidebar.ejs %>
+
+
+
+<% include script.ejs %>
+<script>
+	$("div#myId").dropzone({ url: "/file/post" });
+	$(document).ready(function() {
+		// var socket= io.connect();
+		var socket = io();
+	});
+
+</script>
+
+
+
+</body>
+</html>

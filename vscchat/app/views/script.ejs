@@ -1,0 +1,19 @@
+<script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/dist/js/jquery.nicescroll.js"></script>
+<script src="/dist/js/scripts.js"></script>
+<script src="/bower_components/socket.io-client/dist/socket.io.js"></script>
+<script src="/js/main.js"></script>
+<script>
+		$(document).ready(function() {
+			 var navoffeset=$(".header-main").offset().top;
+			 $(window).scroll(function(){
+				var scrollpos=$(window).scrollTop(); 
+				if(scrollpos >=navoffeset){
+					$(".header-main").addClass("fixed");
+				}else{
+					$(".header-main").removeClass("fixed");
+				}
+			 });
+			 
+		});
+		</script>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Vsc Chat</title>
+	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" crossorigin="anonymous">
+	<script src="bower_components/jquery/dist/jquery.min.js"></script>
+	<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="bower_components/socket.io-client/dist/socket.io.js"></script>
+	<!-- <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css"> -->
+	<style>
+		.main{
+			display: none;
+		}
+	</style>
+	<!-- <% include links.ejs %> -->
+</head>
+<body>
+<div class="page-container">
+
+<% include nav.ejs %>
+<div class="inner-block" style="min-height: 880px">
+
+
+<input type="hidden" id="ip" value="<%= ip %>">
+		<div class="row main">
+		<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4" style="position: fixed;bottom: 0;right: 0;">
+			<div class="well">
+				<h3>Online Users</h3>
+				<ul class="list-group" id="users">
+				<li class="list-group-item"><%= user.username %></li>
+				</ul>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-6 col-md-8 col-lg-8">
+			<div class="chat" id="chat"></div>
+		</div>
+	</div>
+	<div class="row main">
+		<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+		
+			<form id="messageform" style="" class="form" method="post" encType="multipart/form-data" ref="uploadForm">
+				<label>Enter message</label>
+				<input type="text" class="form-control" id="massege" required></input>
+				<!-- <input id="file" type="file" name="sampleFile" /> -->
+				<br>				
+				<!-- <button id="upload" type="button" class="btn btn-lg btn-primary">Send file</button> -->
+
+				<button type="submit" class="btn btn-lg btn-primary">Send Message</button>
+			</form>
+		</div>
+	</div>
+</div>
+</div>
+	<% include sidebar.ejs %>
+</div>
+
+<script>
+	$(document).ready(function() {
+		$('.main').show();
+		var ip=$('#ip').val();
+		var socket= io.connect();
+		var messageform = $('#messageform');
+		var msg= $('#massege');
+		var chat= $('#chat');
+		var users=$('#users');
+		var userform=$('#userform');
+		var username=$('#username');
+		var upload=$('#upload');
+		upload.click(function(){
+			var formdata = new FormData(messageform);
+			$.ajax({
+				url:'/upload',
+				type:'post',
+				data: formdata,
+				async: false
+			});
+		});
+
+		messageform.submit(function(e) {
+			e.preventDefault();
+			// console.log('submited');
+			socket.emit('sendmsg',{mssg:msg.val(),ipadd:ip}); 
+			msg.val('');
+		});
+		socket.on('newmsg',function (data) {
+			chat.append('<div class="well"><b>'+data.ip.slice(7)+' @ '+data.user+': &nbsp</b>'+data.mssg+'</div>');
+				$("html, body").animate({ scrollTop: $(document).height() }, 1000);
+		});
+			socket.on('getusers',function (data) {
+			for (var i = 0; i < data.length; i++) {
+				users.append('<li class="list-group-item">'+data[i]+'</li>');
+			}
+		});
+	});
+</script>
+<% include script.ejs %>
+	<!-- <script src="bower_components/bootstrap/dist/dist/js/bootstrap.min.js"></script> -->
+	<!-- <script src="bower_components/jquery/dist/jquery.min.js"></script> -->
+</body>
+</html>

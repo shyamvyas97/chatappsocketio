@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vsc Chat</title>
+<% include links.ejs %>
+</head>
+<body>
+<div class="page-container">
+
+<% include nav.ejs %>
+<div class="inner-block" style="min-height: 860px">
+      <center><h1>
+        <div class="chat-about">
+            <div class="chat-room">Room Name:-<%= room.title %></div>
+          <img class="img-circle" width="30px" src="<%= user.picture %>" alt="avatar">
+            <span class="chat-num-users"> User(s)</span>
+        </div>
+      </h1>
+      </center>
+    <div class="container">
+      <div class="chat">
+        <!-- <div class="chat-header">
+          <div class="chat-about">
+            <div class="chat-room"><%= room.title %></div>
+            <div class="chat-num-users"> User(s)</div>
+          </div>
+        </div> -->
+        <div class="chat-history">
+          <ul>
+          </ul>
+        </div> <!-- end chat-history -->
+        
+        <div class="chat-message">
+          <textarea name="message" placeholder ="Type your message" rows="3"></textarea> 
+          <button type="submit">Send</button>
+        </div> <!-- end chat-message -->
+      </div> <!-- end chat -->
+      
+      <div style="background: green;padding: 7px;">
+          <h2 style="text-align: center;">Online users</h2>
+      </div>
+          <div class="users-list">
+            <ul class="list">
+            </ul>
+          </div>
+
+    </div>
+<!-- <% include footer.ejs %> -->
+</div>
+</div>
+<% include sidebar.ejs %>
+<script>
+
+  $(document).ready(function() {
+    // var socket= io.connect();
+    app.chat('<%= room.id %>', '<%= user.username %>')
+    $('.page-container').addClass('sidebar-collapsed-back');
+    $('.page-container').removeClass('sidebar-collapsed-back');
+    $('.page-container').addClass('sidebar-collapsed');
+    var socket = io();
+  });
+
+</script>
+<% include script.ejs %>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<% include links.ejs %>
+
+</head>
+<body>
+
+<div id="wrapper">
+	<% include nav.ejs %>
+
+	<div id="page-wrapper" style="min-height:500px;">
+
+	</div>
+
+</div>
+<% include script.ejs %>
+<script>
+	$(document).ready(function() {
+		// var socket= io.connect();
+		var socket = io();
+	});
+
+</script>
+
+
+
+</body>
+</html>

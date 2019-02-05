@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vsc Chat</title>
+   
+<% include links.ejs %>
+</head>
+<body>
+<div class="page-container">
+
+<% include nav.ejs %>
+<div class="inner-block" style="min-height: 860px">
+  <div class="row">
+
+      <div class="room" style="width: 100%;">
+        <div class="room-header clearfix">
+          <div class="room-about">
+            <div class="room-title">Rooms</div>
+            <div class="room-num-rooms"><%= rooms.length %> Room(s)</div>
+          </div>
+        </div> <!-- end room-header -->
+        
+        <div class="room-list">
+          <ul>
+            <table class="table table-responsive">
+            <% if(rooms.length > 0) { %>
+              <% rooms.forEach(function(room) { %>
+                  <tr>
+                  <td><%= room.title %></td><td><a href="delete/<%= room.id %>" class="btn btn-danger">delete</a></td>
+                  </tr>
+                <% }); %>
+            <% } else { %>
+              <p class="message" style="text-align: center; padding: 0; margin: 0;">Create your first room!</p>
+            <% } %>
+            </table>
+          </ul>
+        </div> <!-- end room-list -->
+      </div> <!-- end room -->
+    <script src="/js/main.js"></script>
+    <script>$(function(){app.rooms()});</script>
+  </div>
+</div>
+
+<% include footer.ejs %>
+
+</div>
+<% include sidebar.ejs %>
+
+
+
+<% include script.ejs %>
+<script>
+
+
+  $(document).ready(function() {
+    // var socket= io.connect();
+    $('.page-container').addClass('sidebar-collapsed-back');
+    $('.page-container').removeClass('sidebar-collapsed-back');
+    $('.page-container').addClass('sidebar-collapsed');
+    var socket = io();
+  });
+
+</script>
+</body>
+</html>

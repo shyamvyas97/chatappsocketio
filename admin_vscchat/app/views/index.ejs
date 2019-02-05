@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Vsc Chat</title>
+   
+<% include links.ejs %>
+
+</head>
+<body>
+<div class="page-container">
+
+<% include nav.ejs %>
+<div class="inner-block" style="min-height: 860px">
+	<div class="row">
+		
+		<div class="col-md-12">
+			<div class="jumbotron">
+			  <center><h1><a href="/rooms">Rooms</a></h1></center>
+			</div>
+		</div>
+	</div>
+</div>
+
+<% include footer.ejs %>
+</div>
+<% include sidebar.ejs %>
+<% include script.ejs %>
+<script>
+
+	$(document).ready(function() {
+		$('.page-container').addClass('sidebar-collapsed-back');
+    	$('.page-container').removeClass('sidebar-collapsed-back');
+    	$('.page-container').addClass('sidebar-collapsed');
+		var socket = io();
+	});
+
+</script>
+</body>
+</html>
